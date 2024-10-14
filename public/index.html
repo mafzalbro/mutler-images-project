@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Files</title>
+    <style>
+      body {
+        background: #000;
+        color: #fff;
+        width: 80vw;
+        margin: 0 auto;
+      }
+      a {
+        color: #fff;
+      }
+      .images {
+        margin: 30px auto;
+        overflow-x: hidden;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        justify-content: center;
+      }
+      .images a {
+        width: 40%;
+        overflow: hidden;
+      }
+      .image img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        border-radius: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <a href="/uploads">See Links</a>
+    </p>
+    <form action="/profile" method="post" enctype="multipart/form-data">
+      <input type="file" name="avatar" />
+      <input type="submit" value="submit" />
+    </form>
+
+    <div class="images"></div>
+    <script>
+      const fetchImageUrls = async () => {
+        const images = document.querySelector(".images");
+        const data = await (await fetch("/files")).json();
+        let html = "";
+        data.files.forEach((file) => {
+          html += `
+        <a href="/uploads/${file}">
+            <div class='image'>
+                <img src="/uploads/${file}" alt="${file}">
+            </div>
+        </a>
+                `;
+        });
+        images.innerHTML = html;
+      };
+      fetchImageUrls();
+    </script>
+  </body>
+</html>

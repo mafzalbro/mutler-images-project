@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Files</title>
+  </head>
+  <p>
+      <a href="/">Upload</a>
+  </p>
+  <div class="images"></div>
+  <body>
+    <script>
+      const fetchImageUrls = async () => {
+        const images = document.querySelector('.images')
+        const data = await (await fetch("/files")).json();
+        let html = "";
+        data.files.forEach((file) => {
+          html += `
+            <a href="/uploads/${file}">
+            <div>
+                ${file}
+                <br>
+                </div>
+                </a>
+                `;
+        });
+        images.innerHTML = html;
+      };
+      fetchImageUrls();
+    </script>
+  </body>
+</html>
