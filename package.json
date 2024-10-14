@@ -3,7 +3,7 @@
     "express": "^4.21.1",
     "multer": "^1.4.5-lts.1"
   },
-  "name": "multer",
+  "name": "multer-images-project",
   "version": "1.0.0",
   "main": "main.js",
   "devDependencies": {},
